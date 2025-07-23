@@ -1,4 +1,4 @@
-name = "{{project-name}}"
+name = "{{crate_name}}"
 main = "build/worker/shim.mjs"
 compatibility_date = "2025-03-10"
 compatibility_flags = ["nodejs_compat"]

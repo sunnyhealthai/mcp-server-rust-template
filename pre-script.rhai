@@ -7,16 +7,12 @@ fn init() {
         variable::set("crate_type", "bin");
     }
     
-    // Derive the crate name from project name
-    let project_name = variable::get("project-name");
-    let crate_name = project_name.to_lower().replace("-", "_");
-    variable::set("crate_name", crate_name);
-    
     // Set the current year for copyright
     let current_year = "2024"; // In a real scenario, this would be dynamic
     variable::set("copyright_year", current_year);
     
     // Log some information
-    print("Setting up MCP Server template for: " + project_name);
-    print("Crate name will be: " + crate_name);
+    let server_name = variable::get("server_name");
+    print("Setting up MCP Server template");
+    print("Server name: " + server_name);
 }

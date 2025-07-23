@@ -2,13 +2,16 @@
 // This runs after the template is processed
 
 fn init() {
-    let project_name = variable::get("project-name");
+    // cargo-generate provides the project-name automatically
+    let project_name = variable::get("crate_name");
+    let server_name = variable::get("server_name");
     
     print("====================================");
     print("MCP Server template generated successfully!");
     print("====================================");
     print("");
     print("Project: " + project_name);
+    print("Server Name: " + server_name);
     print("");
     print("Next steps:");
     print("1. cd " + project_name);

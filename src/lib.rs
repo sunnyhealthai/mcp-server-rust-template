@@ -135,7 +135,7 @@ pub struct ToolsCallResult {
 }
 
 // Configuration constants - Update these for your MCP server
-const SERVER_NAME: &str = "{{project-name}}";
+const SERVER_NAME: &str = "{{server_name}}";
 const SERVER_VERSION: &str = "1.0.0";
 const PROTOCOL_VERSION: &str = "2024-11-05";
 

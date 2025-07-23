@@ -3,11 +3,11 @@ cargo_generate_version = ">=0.18.0"
 ignore = [".git", "target", "node_modules", ".wrangler", "build"]
 
 [placeholders]
-project-name = { prompt = "What is the name of your MCP server?", type = "string", regex = "^[a-zA-Z][a-zA-Z0-9_-]*$" }
-author-name = { prompt = "Author name?", type = "string" }
-author-email = { prompt = "Author email?", type = "string" }
-github-username = { prompt = "GitHub username (for repository URL)?", type = "string" }
-server-description = { prompt = "Brief description of your MCP server?", type = "string" }
+server_name = { prompt = "What is the display name of your MCP server?", type = "string" }
+author_name = { prompt = "Author name?", type = "string" }
+author_email = { prompt = "Author email?", type = "string" }
+github_username = { prompt = "GitHub username (for repository URL)?", type = "string" }
+server_description = { prompt = "Brief description of your MCP server?", type = "string" }
 
 [conditional.'crate_type == "bin"']
 ignore = ["benches"]
