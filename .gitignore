@@ -1,0 +1,40 @@
+# Rust
+target/
+Cargo.lock
+*.rs.bk
+
+# Wrangler/Cloudflare
+.wrangler/
+build/
+dist/
+worker/
+
+# Dependencies (if any JS tooling is added later)
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# LLM
+.claude/

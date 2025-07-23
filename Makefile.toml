@@ -1,0 +1,128 @@
+[config]
+skip_core_tasks = false
+default_to_workspace = false
+
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[tasks.format]
+description = "Format code using rustfmt"
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.lint]
+description = "Run clippy for linting"
+command = "cargo"
+args = ["clippy", "--all-targets", "--all-features", "--", "-D", "warnings"]
+
+[tasks.test]
+description = "Run all tests"
+command = "cargo"
+args = ["test", "--all"]
+
+[tasks.test-integration]
+description = "Run integration test script"
+script = ["./examples/test_mcp_client.sh"]
+dependencies = ["dev-server-start"]
+
+[tasks.build]
+description = "Build the project for Cloudflare Workers"
+command = "wrangler"
+args = ["build"]
+
+[tasks.build-release]
+description = "Build the project in release mode"
+command = "wrangler"
+args = ["build", "--compatibility-date", "2024-01-01"]
+
+[tasks.dev]
+description = "Start development server"
+command = "wrangler"
+args = ["dev"]
+
+[tasks.dev-server-start]
+description = "Start dev server in background for testing"
+script = [
+    "wrangler dev &",
+    "sleep 5"
+]
+
+[tasks.deploy]
+description = "Deploy to Cloudflare Workers"
+command = "wrangler"
+args = ["deploy"]
+dependencies = ["build-release", "test"]
+
+[tasks.install-deps]
+description = "Install required dependencies"
+script = [
+    "echo 'Installing worker-build...'",
+    "cargo install worker-build",
+    "echo 'Installing wrangler...'",
+    "cargo install wrangler",
+    "echo 'All dependencies installed!'"
+]
+
+[tasks.check]
+description = "Check project for errors without building"
+command = "cargo"
+args = ["check", "--all"]
+
+[tasks.clean]
+description = "Clean build artifacts"
+script = [
+    "cargo clean",
+    "rm -rf build/",
+    "rm -rf .wrangler/"
+]
+
+[tasks.ci]
+description = "Run CI pipeline"
+dependencies = [
+    "format",
+    "lint",
+    "check",
+    "test",
+    "build"
+]
+
+[tasks.coverage]
+description = "Generate test coverage report"
+install_crate = { crate_name = "cargo-tarpaulin", binary = "cargo-tarpaulin", test_arg = "--version" }
+command = "cargo"
+args = ["tarpaulin", "--out", "Html", "--output-dir", "./coverage"]
+
+[tasks.docs]
+description = "Generate and open documentation"
+command = "cargo"
+args = ["doc", "--open", "--no-deps"]
+
+[tasks.watch]
+description = "Watch for changes and rebuild"
+install_crate = { crate_name = "cargo-watch", binary = "cargo-watch", test_arg = "--version" }
+command = "cargo"
+args = ["watch", "-x", "check", "-x", "test", "-x", "build"]
+
+[tasks.init]
+description = "Initialize the project with all dependencies"
+dependencies = ["install-deps"]
+script = [
+    "echo 'Project initialized successfully!'",
+    "echo 'Run \"cargo make dev\" to start the development server'"
+]
+
+# Aliases for common workflows
+[tasks.default]
+alias = "dev"
+
+[tasks.t]
+alias = "test"
+
+[tasks.b]
+alias = "build"
+
+[tasks.d]
+alias = "deploy"
+
+[tasks.c]
+alias = "check"
