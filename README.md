@@ -11,7 +11,7 @@ A production-ready template for building MCP (Model Context Protocol) servers in
 cargo install cargo-generate
 
 # Generate a new project from this template
-cargo generate --git https://github.com/yourusername/mcp-server-rust-template.git --name my-mcp-server
+cargo generate --git git@github.com:sunnyhealthai/mcp-server-rust-template.git --name my-mcp-server
 
 # Navigate to your new project
 cd my-mcp-server
@@ -25,7 +25,7 @@ cargo make dev
 
 1. **Clone this template**
    ```bash
-   git clone https://github.com/yourusername/mcp-server-rust-template.git my-mcp-server
+   git clone git@github.com:sunnyhealthai/mcp-server-rust-template.git my-mcp-server
    cd my-mcp-server
    ```
 
