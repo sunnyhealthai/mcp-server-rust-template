@@ -115,7 +115,7 @@ struct ToolsList {
     tools: Vec<Tool>,
 }
 
-#[derive(Debug, Serialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Tool {
     name: String,
     description: Option<String>,
